@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+
+    <item android:title="Korisni web servisi">
+        <menu>
+            <item android:id="@+id/nav_share" android:icon="@android:drawable/ic_menu_mapmode"
+                android:title="Bolnice u Hrvatskoj" />
+            <item android:id="@+id/nav_send" android:icon="@android:drawable/ic_menu_agenda"
+                android:title="Popis lijekova" />
+        </menu>
+    </item>
+
+</menu>
