@@ -10,13 +10,14 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.mark.mydoctors.Model.Disease;
 import com.example.mark.mydoctors.Model.Medicine;
 import com.example.mark.mydoctors.Model.Patient;
+import com.example.mark.mydoctors.dao.PatientDao;
 
 import java.util.ArrayList;
 
 /**
  * Created by Mark on 21.05.2016..
  */
-public class DBHelper extends SQLiteOpenHelper {
+public abstract class DBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "MyDBName2.db";
 
@@ -41,6 +42,8 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS medicine");
         onCreate(db);
     }
+
+    public abstract PatientDao patientDao();
 
     public boolean insertPatient(Patient p)
     {

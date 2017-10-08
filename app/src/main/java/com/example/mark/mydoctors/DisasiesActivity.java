@@ -38,7 +38,7 @@ public class DisasiesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        mydb = new DBHelper(this);
+        final DBHelper mydb = new DBHelper(this){};
 
 
 

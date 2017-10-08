@@ -59,7 +59,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         else {
-            mydb = new DBHelper(this);
+            final DBHelper mydb = new DBHelper(this){};
             ArrayList<Patient> array_list = mydb.getAllPatients();
 
             LatLng sydney = new LatLng(0,0);

@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //inputSearch = (EditText) findViewById(R.id.myEditTextSearch);
-        mydb = new DBHelper(this);
+        final DBHelper mydb = new DBHelper(this){};
         array_list = mydb.getAllPatients();
         arrayAdapter = new PatientAdapter(this,R.layout.patient_content_adapter, array_list);
 
