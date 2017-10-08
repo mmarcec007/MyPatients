@@ -42,6 +42,7 @@ public abstract class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    // TODO Find a proper solution for database integration into the dao.
     //public abstract PatientDao patientDao();
 
     public boolean insertPatient(Patient p)
