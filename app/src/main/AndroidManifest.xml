@@ -27,20 +27,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ItemListActivity"
-            android:label="@string/title_item_list"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".ItemDetailActivity"
-            android:label="@string/title_item_detail"
-            android:parentActivityName=".ItemListActivity"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.mark.mydoctors.ItemListActivity" />
-        </activity>
-        <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings" >
         </activity>
@@ -63,11 +49,6 @@
         <activity
             android:name=".DisasiesActivity"
             android:label="@string/title_activity_disasies"
-            android:theme="@style/AppTheme.NoActionBar" >
-        </activity>
-        <activity
-            android:name=".Activities.MedicinesForDiseasesActivity"
-            android:label="@string/title_activity_medicines_for_diseases"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity

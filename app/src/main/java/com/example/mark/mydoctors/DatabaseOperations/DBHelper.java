@@ -12,7 +12,6 @@ import com.example.mark.mydoctors.Model.Medicine;
 import com.example.mark.mydoctors.Model.Patient;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * Created by Mark on 21.05.2016..
@@ -20,31 +19,6 @@ import java.util.HashMap;
 public class DBHelper extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "MyDBName2.db";
-
-    //patient table
-    public static final String PATIENTS_TABLE_NAME = "patients";
-    public static final String PATIENTS_COLUMN_ID = "id";
-    public static final String PATIENTS_COLUMN_NAME = "name";
-    public static final String PATIENTS_COLUMN_SURNAME = "surname";
-    public static final String PATIENTS_COLUMN_EMAIL = "email";
-    public static final String PATIENTS_COLUMN_STREET = "street";
-    public static final String PATIENTS_COLUMN_CITY = "place";
-    public static final String PATIENTS_COLUMN_PHONE = "phone";
-
-    //disease table
-    public static final String DISEASE_TABLE_NAME = "diseases";
-    public static final String DISEASE_COLUMN_ID = "id";
-    public static final String DISEASE_COLUMN_NAME = "name";
-    public static final String DISEASE_COLUMN_IS_OVER = "is_over";
-    public static final String DISEASE_PATIENT_COLUMN_ID = "patient_id";
-
-    //medicine table
-    public static final String MEDICINE_TABLE_NAME = "medicine";
-    public static final String MEDICINE_COLUMN_ID = "id";
-    public static final String MEDICINE_COLUMN_NAME = "name";
-    public static final String MEDICINE_DISEASE_COLUMN_ID = "disease_id";
-
-    private HashMap hp;
 
     public DBHelper(Context context)
     {
@@ -141,28 +115,6 @@ public class DBHelper extends SQLiteOpenHelper {
         return array_list;
     }
 
-    public int getDiseaseId(int id) {
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor res =  db.rawQuery("SELECT * FROM diseases WHERE patient_id = " + id + "", null);
-        int empName = 0;
-
-
-
-
-
-                res.moveToFirst();
-                empName = Integer.parseInt(res.getString(res.getColumnIndex("id")));
-
-
-
-
-
-            res.close();
-
-        return empName;
-
-    }
-
     public ArrayList<Medicine> getMedicinesForDisease(int id)
     {
         ArrayList<Medicine> array_list = new ArrayList<>();
@@ -211,7 +163,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public int numberOfPatientsRows(){
         SQLiteDatabase db = this.getReadableDatabase();
-        int numRows = (int) DatabaseUtils.queryNumEntries(db, PATIENTS_TABLE_NAME);
+        int numRows = (int) DatabaseUtils.queryNumEntries(db, "patients");
         return numRows;
     }
 

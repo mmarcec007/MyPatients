@@ -67,14 +67,10 @@ public class MainActivity extends AppCompatActivity
             public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
                 // TODO Auto-generated method stub
                 Patient p = (Patient) obj.getItemAtPosition(arg2);
-
                 Intent i = new Intent(getApplicationContext(), DisasiesActivity.class);
                 i.putExtra("patients_id", p.getId());
                 startActivity(i);
-
             }
-
-
         });
 
         obj.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -99,9 +95,7 @@ public class MainActivity extends AppCompatActivity
                 final TextView place = (TextView) promptsView.findViewById(R.id.editTextDialogUserDetailsPlace);
                 final TextView phone = (TextView) promptsView.findViewById(R.id.editTextDialogUserDetailsPhone);
 
-
                 Patient p = (Patient) obj.getItemAtPosition(pos);
-
                 name.setText(p.getName());
                 surname.setText(p.getSurname());
                 email.setText(p.getEmail());
@@ -233,11 +227,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
         setSupportActionBar(toolbar);
-
-
-
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -280,7 +270,7 @@ public class MainActivity extends AppCompatActivity
                         }
                     }
                 }
-                arrayAdapter = new PatientAdapter(context,R.layout.patient_content_adapter, tempArrayList);
+                arrayAdapter = new PatientAdapter(context, R.layout.patient_content_adapter, tempArrayList);
                 obj.setAdapter(arrayAdapter);
             }
         });
