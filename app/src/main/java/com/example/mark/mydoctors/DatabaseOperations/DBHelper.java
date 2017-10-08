@@ -10,7 +10,6 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.example.mark.mydoctors.Model.Disease;
 import com.example.mark.mydoctors.Model.Medicine;
 import com.example.mark.mydoctors.Model.Patient;
-import com.example.mark.mydoctors.dao.PatientDao;
 
 import java.util.ArrayList;
 
@@ -43,7 +42,7 @@ public abstract class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public abstract PatientDao patientDao();
+    //public abstract PatientDao patientDao();
 
     public boolean insertPatient(Patient p)
     {
