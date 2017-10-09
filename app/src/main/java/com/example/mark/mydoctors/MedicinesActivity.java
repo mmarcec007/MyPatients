@@ -15,8 +15,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import com.example.mark.mydoctors.Adapters.MedicineAdapter;
-import com.example.mark.mydoctors.DatabaseOperations.DBHelper;
 import com.example.mark.mydoctors.Model.Medicine;
+import com.example.mark.mydoctors.dao.MedicineDao;
 
 import java.util.ArrayList;
 
@@ -24,7 +24,7 @@ public class MedicinesActivity extends AppCompatActivity {
     Context context = this;
     MedicineAdapter arrayAdapter;
     private ListView obj;
-    DBHelper mydb;
+    MedicineDao medicineDao;
     int id_pa = 0;
     int id_pa1 = 0;
     ArrayList array_list;
@@ -36,7 +36,7 @@ public class MedicinesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        final DBHelper mydb = new DBHelper(this){};
+        medicineDao = new MedicineDao(this);
 
 
 
@@ -44,7 +44,7 @@ public class MedicinesActivity extends AppCompatActivity {
         id_pa = extras.getInt("diseases_id");
         id_pa1 = extras.getInt("patients_id");
 
-        array_list = mydb.getMedicinesForDisease(id_pa);
+        array_list = medicineDao.getMedicinesForDisease(id_pa);
         arrayAdapter = new MedicineAdapter(this,R.layout.medicine_content_adapter, array_list);
 
         obj = (ListView)findViewById(R.id.listViewMedicines);
@@ -72,7 +72,7 @@ public class MedicinesActivity extends AppCompatActivity {
                         "DA",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                mydb.deleteMedicine(m.getId());
+                                medicineDao.deleteMedicine(m.getId());
                                 arrayAdapter.remove(m);
                             }
                         });
@@ -119,11 +119,11 @@ public class MedicinesActivity extends AppCompatActivity {
                                         m.setName(name.getText().toString());
                                         m.setDisease_id(extras.getInt("diseases_id"));
                                         m.setPatient_id(extras.getInt("patients_id"));
-                                        mydb.insertMedicinesForDisease(m, extras.getInt("diseases_id"));
+                                        medicineDao.insertMedicinesForDisease(m, extras.getInt("diseases_id"));
 
 
                                         array_list.clear();
-                                        array_list = mydb.getMedicinesForDisease(id_pa);
+                                        array_list = medicineDao.getMedicinesForDisease(id_pa);
                                         arrayAdapter = new MedicineAdapter(context,R.layout.disease_content_adapter, array_list);
                                         obj.setAdapter(arrayAdapter);
                                         arrayAdapter.notifyDataSetChanged();

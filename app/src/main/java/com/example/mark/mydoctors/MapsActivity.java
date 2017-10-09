@@ -1,14 +1,13 @@
 package com.example.mark.mydoctors;
 
-import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
 import com.example.mark.mydoctors.CustomHelpers.Communicator;
-import com.example.mark.mydoctors.DatabaseOperations.DBHelper;
 import com.example.mark.mydoctors.Model.Patient;
+import com.example.mark.mydoctors.dao.PatientDao;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,8 +21,8 @@ import java.util.List;
 import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-    Context context;
-    DBHelper mydb;
+
+    PatientDao patientDao;
     private GoogleMap mMap;
 
     @Override
@@ -59,8 +58,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         else {
-            final DBHelper mydb = new DBHelper(this){};
-            ArrayList<Patient> array_list = mydb.getAllPatients();
+            patientDao = new PatientDao(this);
+            ArrayList<Patient> array_list = patientDao.getAllPatients();
 
             LatLng sydney = new LatLng(0,0);
 
@@ -111,7 +110,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     public LatLng GetLatitudeAndLongitude(String address) {
-        Geocoder geocoder = new Geocoder(context, Locale.getDefault());
+        Geocoder geocoder = new Geocoder(getApplicationContext(), Locale.getDefault());
 
         LatLng l = new LatLng(0, 0);
         try {

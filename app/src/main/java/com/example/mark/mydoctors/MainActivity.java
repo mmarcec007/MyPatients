@@ -28,8 +28,10 @@ import android.widget.Toast;
 
 import com.example.mark.mydoctors.Adapters.PatientAdapter;
 import com.example.mark.mydoctors.CustomHelpers.Communicator;
-import com.example.mark.mydoctors.DatabaseOperations.DBHelper;
 import com.example.mark.mydoctors.Model.Patient;
+import com.example.mark.mydoctors.dao.DiseaseDao;
+import com.example.mark.mydoctors.dao.MedicineDao;
+import com.example.mark.mydoctors.dao.PatientDao;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
@@ -44,7 +46,10 @@ public class MainActivity extends AppCompatActivity
     PatientAdapter arrayAdapter;
 
     private ListView obj;
-    DBHelper mydb;
+
+    PatientDao patientDao;
+    DiseaseDao diseaseDao;
+    MedicineDao medicineDao;
     ArrayList array_list;
 
     @Override
@@ -54,8 +59,11 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //inputSearch = (EditText) findViewById(R.id.myEditTextSearch);
-        final DBHelper mydb = new DBHelper(this){};
-        array_list = mydb.getAllPatients();
+        patientDao = new PatientDao(this);
+        diseaseDao = new DiseaseDao(this);
+        medicineDao = new MedicineDao(this);
+
+        array_list = patientDao.getAllPatients();
         arrayAdapter = new PatientAdapter(this,R.layout.patient_content_adapter, array_list);
 
         inputSearch = (EditText) findViewById(R.id.inputSearch);
@@ -115,7 +123,7 @@ public class MainActivity extends AppCompatActivity
                                         Patient p = (Patient) obj.getItemAtPosition(pos);
                                         callIntent.setData(Uri.parse("tel:" + p.getPhone()));
                                         callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                                        startActivity(callIntent);
+                                        //startActivity(callIntent);
                                         break;
                                     case 1:
                                         Intent i = new Intent(Intent.ACTION_SEND);
@@ -144,9 +152,9 @@ public class MainActivity extends AppCompatActivity
                                         p = (Patient) obj.getItemAtPosition(pos);
 
 
-                                            mydb.deleteMedicine(p.getId());
-                                            mydb.deletedPatientsDiseases(p.getId());
-                                            mydb.deletePatient(p.getId());
+                                            medicineDao.deleteMedicine(p.getId());
+                                            diseaseDao.deletedPatientsDiseases(p.getId());
+                                            patientDao.deletePatient(p.getId());
                                             arrayAdapter.remove(p);
                                             arrayAdapter.notifyDataSetChanged();
 
@@ -197,7 +205,7 @@ public class MainActivity extends AppCompatActivity
                                                                 p.setStreet(street.getText().toString());
                                                                 p.setPlace(place.getText().toString());
 
-                                                                mydb.updatePatient(p);
+                                                                patientDao.updatePatient(p);
                                                                 arrayAdapter.notifyDataSetChanged();
                                                             }
                                                         })
@@ -340,10 +348,10 @@ public class MainActivity extends AppCompatActivity
                                     p.setEmail(email.getText().toString());
                                     p.setStreet(street.getText().toString());
                                     p.setPlace(place.getText().toString());
-                                    mydb.insertPatient(p);
+                                    patientDao.insertPatient(p);
 
                                     array_list.clear();
-                                    array_list = mydb.getAllPatients();
+                                    array_list = patientDao.getAllPatients();
                                     arrayAdapter = new PatientAdapter(context,R.layout.patient_content_adapter, array_list);
                                     obj.setAdapter(arrayAdapter);
                                     arrayAdapter.notifyDataSetChanged();
