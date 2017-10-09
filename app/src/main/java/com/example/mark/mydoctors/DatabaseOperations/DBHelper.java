@@ -1,14 +1,8 @@
 package com.example.mark.mydoctors.DatabaseOperations;
 
-import android.content.ContentValues;
 import android.content.Context;
-import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
-import com.example.mark.mydoctors.Model.Medicine;
-
-import java.util.ArrayList;
 
 /**
  * Created by Mark on 21.05.2016..
@@ -38,9 +32,5 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS medicine");
         onCreate(db);
     }
-
-
-
-
 
 }

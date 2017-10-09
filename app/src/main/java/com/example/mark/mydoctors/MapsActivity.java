@@ -30,6 +30,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
 
+
+        patientDao = new PatientDao(this);
+
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
@@ -58,7 +61,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         else {
-            patientDao = new PatientDao(this);
             ArrayList<Patient> array_list = patientDao.getAllPatients();
 
             LatLng sydney = new LatLng(0,0);
