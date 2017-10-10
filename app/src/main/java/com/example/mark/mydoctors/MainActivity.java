@@ -29,9 +29,7 @@ import android.widget.Toast;
 import com.example.mark.mydoctors.Adapters.PatientAdapter;
 import com.example.mark.mydoctors.CustomHelpers.Communicator;
 import com.example.mark.mydoctors.Model.Patient;
-import com.example.mark.mydoctors.dao.DiseaseDao;
-import com.example.mark.mydoctors.dao.MedicineDao;
-import com.example.mark.mydoctors.dao.PatientDao;
+import com.example.mark.mydoctors.dao.CoreDao;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
@@ -47,9 +45,8 @@ public class MainActivity extends AppCompatActivity
 
     private ListView obj;
 
-    PatientDao patientDao;
-    DiseaseDao diseaseDao;
-    MedicineDao medicineDao;
+    CoreDao coreDao;
+
     ArrayList array_list;
 
     @Override
@@ -59,11 +56,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //inputSearch = (EditText) findViewById(R.id.myEditTextSearch);
-        patientDao = new PatientDao(this);
-        diseaseDao = new DiseaseDao(this);
-        medicineDao = new MedicineDao(this);
+        coreDao = new CoreDao(this);
 
-        array_list = patientDao.getAllPatients();
+        array_list = coreDao.instantiatePatientDao().getAllPatients();
         arrayAdapter = new PatientAdapter(this,R.layout.patient_content_adapter, array_list);
 
         inputSearch = (EditText) findViewById(R.id.inputSearch);
@@ -152,9 +147,9 @@ public class MainActivity extends AppCompatActivity
                                         p = (Patient) obj.getItemAtPosition(pos);
 
 
-                                            medicineDao.deleteMedicine(p.getId());
-                                            diseaseDao.deletedPatientsDiseases(p.getId());
-                                            patientDao.deletePatient(p.getId());
+                                            coreDao.instantiateMedicinenDao().deleteMedicine(p.getId());
+                                            coreDao.instantiateDiseaseDao().deletedPatientsDiseases(p.getId());
+                                            coreDao.instantiatePatientDao().deletePatient(p.getId());
                                             arrayAdapter.remove(p);
                                             arrayAdapter.notifyDataSetChanged();
 
@@ -205,7 +200,7 @@ public class MainActivity extends AppCompatActivity
                                                                 p.setStreet(street.getText().toString());
                                                                 p.setPlace(place.getText().toString());
 
-                                                                patientDao.updatePatient(p);
+                                                                coreDao.instantiatePatientDao().updatePatient(p);
                                                                 arrayAdapter.notifyDataSetChanged();
                                                             }
                                                         })
@@ -348,10 +343,10 @@ public class MainActivity extends AppCompatActivity
                                     p.setEmail(email.getText().toString());
                                     p.setStreet(street.getText().toString());
                                     p.setPlace(place.getText().toString());
-                                    patientDao.insertPatient(p);
+                                    coreDao.instantiatePatientDao().insertPatient(p);
 
                                     array_list.clear();
-                                    array_list = patientDao.getAllPatients();
+                                    array_list = coreDao.instantiatePatientDao().getAllPatients();
                                     arrayAdapter = new PatientAdapter(context,R.layout.patient_content_adapter, array_list);
                                     obj.setAdapter(arrayAdapter);
                                     arrayAdapter.notifyDataSetChanged();
