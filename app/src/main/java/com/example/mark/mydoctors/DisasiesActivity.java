@@ -16,8 +16,7 @@ import android.widget.ListView;
 
 import com.example.mark.mydoctors.Adapters.DiseaseAdapter;
 import com.example.mark.mydoctors.Model.Disease;
-import com.example.mark.mydoctors.dao.DiseaseDao;
-import com.example.mark.mydoctors.dao.MedicineDao;
+import com.example.mark.mydoctors.dao.CoreDao;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -29,8 +28,7 @@ public class DisasiesActivity extends AppCompatActivity {
     DiseaseAdapter arrayAdapter;
     ArrayList array_list;
     private ListView obj;
-    DiseaseDao diseaseDao;
-    MedicineDao medicineDao;
+    CoreDao coreDao;
     int id_pa = 0;
 
     @Override
@@ -40,16 +38,13 @@ public class DisasiesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        diseaseDao = new DiseaseDao(this);
-        medicineDao = new MedicineDao(this);
-
-
+        coreDao = new CoreDao(this);
 
         final Bundle extras = getIntent().getExtras();
         id_pa = extras.getInt("patients_id");
 
 
-        array_list = diseaseDao.getPatientsDiseases(id_pa);
+        array_list = coreDao.instantiateDiseaseDao().getPatientsDiseases(id_pa);
         arrayAdapter = new DiseaseAdapter(this,R.layout.disease_content_adapter, array_list);
 
         obj = (ListView)findViewById(R.id.listViewDisasies);
@@ -81,8 +76,8 @@ public class DisasiesActivity extends AppCompatActivity {
                         "DA",
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
-                                medicineDao.deletedDiseaseMedicines(d.getId());
-                                diseaseDao.deletedDiseases(d.getId());
+                                coreDao.instantiateMedicinenDao().deletedDiseaseMedicines(d.getId());
+                                coreDao.instantiateDiseaseDao().deletedDiseases(d.getId());
                                 arrayAdapter.remove(d);
                                 arrayAdapter.notifyDataSetChanged();
                             }
@@ -133,10 +128,10 @@ public class DisasiesActivity extends AppCompatActivity {
                                         d.setName(name.getText().toString());
                                         d.setIs_over(currentDateTimeString);
                                         d.setPatient_id(extras.getInt("patients_id"));
-                                        diseaseDao.insertDisease(d, extras.getInt("patients_id"));
+                                        coreDao.instantiateDiseaseDao().insertDisease(d, extras.getInt("patients_id"));
 
                                         array_list.clear();
-                                        array_list = diseaseDao.getPatientsDiseases(id_pa);
+                                        array_list = coreDao.instantiateDiseaseDao().getPatientsDiseases(id_pa);
                                         arrayAdapter = new DiseaseAdapter(context, R.layout.disease_content_adapter, array_list);
                                         obj.setAdapter(arrayAdapter);
                                         arrayAdapter.notifyDataSetChanged();
