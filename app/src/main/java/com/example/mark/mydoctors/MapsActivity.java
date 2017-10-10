@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentActivity;
 
 import com.example.mark.mydoctors.CustomHelpers.Communicator;
 import com.example.mark.mydoctors.Model.Patient;
-import com.example.mark.mydoctors.dao.PatientDao;
+import com.example.mark.mydoctors.dao.CoreDao;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -22,7 +22,7 @@ import java.util.Locale;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
-    PatientDao patientDao;
+    CoreDao coreDao;
     private GoogleMap mMap;
 
     @Override
@@ -31,7 +31,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
 
-        patientDao = new PatientDao(this);
+        coreDao = new CoreDao(this);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -61,7 +61,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
 
         else {
-            ArrayList<Patient> array_list = patientDao.getAllPatients();
+            ArrayList<Patient> array_list = coreDao.instantiatePatientDao().getAllPatients();
 
             LatLng sydney = new LatLng(0,0);
 
