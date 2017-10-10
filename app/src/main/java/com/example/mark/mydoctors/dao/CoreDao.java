@@ -10,7 +10,7 @@ import com.example.mark.mydoctors.DatabaseOperations.DBHelper;
 
 public class CoreDao extends DBHelper {
 
-    Context contextField;
+    private Context contextField;
 
     public CoreDao(Context context)
     {
