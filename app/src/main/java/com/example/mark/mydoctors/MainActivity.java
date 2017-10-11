@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //inputSearch = (EditText) findViewById(R.id.myEditTextSearch);
-        coreDao = new CoreDao(this);
+        coreDao = CoreDao.getInstance(this);
 
         array_list = coreDao.instantiatePatientDao().getAllPatients();
         arrayAdapter = new PatientAdapter(this,R.layout.patient_content_adapter, array_list);

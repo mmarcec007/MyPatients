@@ -38,7 +38,7 @@ public class DisasiesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        coreDao = new CoreDao(this);
+        coreDao = CoreDao.getInstance(this);
 
         final Bundle extras = getIntent().getExtras();
         id_pa = extras.getInt("patients_id");
