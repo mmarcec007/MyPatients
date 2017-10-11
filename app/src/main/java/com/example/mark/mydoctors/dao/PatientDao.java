@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.example.mark.mydoctors.DatabaseOperations.DBHelper;
 import com.example.mark.mydoctors.Model.Patient;
 
 import java.util.ArrayList;
@@ -15,7 +14,7 @@ import java.util.ArrayList;
  * Created by Mark on 07.10.2017..
  */
 
-public class PatientDao extends DBHelper {
+public class PatientDao extends CoreDao {
 
     public PatientDao(Context context) {
         super(context);
