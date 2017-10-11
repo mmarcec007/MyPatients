@@ -18,6 +18,11 @@ public class CoreDao extends DBHelper {
         contextField = context;
     }
 
+    public static CoreDao getInstance(Context context)
+    {
+        return new CoreDao(context);
+    }
+
     public PatientDao instantiatePatientDao()
     {
         return new PatientDao(contextField);
