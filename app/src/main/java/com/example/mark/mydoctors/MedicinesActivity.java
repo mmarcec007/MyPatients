@@ -17,6 +17,7 @@ import android.widget.ListView;
 import com.example.mark.mydoctors.Adapters.MedicineAdapter;
 import com.example.mark.mydoctors.Model.Medicine;
 import com.example.mark.mydoctors.dao.CoreDao;
+import com.example.mark.mydoctors.dao.MyDao;
 
 import java.util.ArrayList;
 
@@ -36,7 +37,7 @@ public class MedicinesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        medicineDao = CoreDao.getInstance(this);
+        medicineDao = MyDao.getInstance();
 
 
 

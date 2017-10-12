@@ -17,6 +17,7 @@ import android.widget.ListView;
 import com.example.mark.mydoctors.Adapters.DiseaseAdapter;
 import com.example.mark.mydoctors.Model.Disease;
 import com.example.mark.mydoctors.dao.CoreDao;
+import com.example.mark.mydoctors.dao.MyDao;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class DisasiesActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        coreDao = CoreDao.getInstance(this);
+        coreDao = MyDao.getInstance();
 
         final Bundle extras = getIntent().getExtras();
         id_pa = extras.getInt("patients_id");

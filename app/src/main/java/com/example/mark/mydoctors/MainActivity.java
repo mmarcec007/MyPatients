@@ -30,6 +30,7 @@ import com.example.mark.mydoctors.Adapters.PatientAdapter;
 import com.example.mark.mydoctors.CustomHelpers.Communicator;
 import com.example.mark.mydoctors.Model.Patient;
 import com.example.mark.mydoctors.dao.CoreDao;
+import com.example.mark.mydoctors.dao.MyDao;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
@@ -56,8 +57,9 @@ public class MainActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
         //inputSearch = (EditText) findViewById(R.id.myEditTextSearch);
-        coreDao = CoreDao.getInstance(this);
+        CoreDao.setInstance(getApplicationContext());
 
+        coreDao = MyDao.getInstance();
         array_list = coreDao.instantiatePatientDao().getAllPatients();
         arrayAdapter = new PatientAdapter(this,R.layout.patient_content_adapter, array_list);
 

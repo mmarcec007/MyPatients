@@ -10,7 +10,7 @@ import com.example.mark.mydoctors.DatabaseOperations.DBHelper;
 
 public class CoreDao extends DBHelper {
 
-    private Context contextField;
+    private static Context contextField;
 
     public CoreDao(Context context)
     {
@@ -18,10 +18,9 @@ public class CoreDao extends DBHelper {
         contextField = context;
     }
 
-    public static CoreDao getInstance(Context context)
-    {
-        return new CoreDao(context);
-    }
+    public static void setInstance(Context context) { new CoreDao(context); }
+
+    public static CoreDao getInstance() { return new CoreDao(contextField); }
 
     public PatientDao instantiatePatientDao()
     {
@@ -33,8 +32,5 @@ public class CoreDao extends DBHelper {
         return new DiseaseDao(contextField);
     }
 
-    public MedicineDao instantiateMedicinenDao()
-    {
-        return new MedicineDao(contextField);
-    }
+    public MedicineDao instantiateMedicinenDao() { return new MedicineDao(contextField); }
 }

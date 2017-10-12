@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentActivity;
 import com.example.mark.mydoctors.CustomHelpers.Communicator;
 import com.example.mark.mydoctors.Model.Patient;
 import com.example.mark.mydoctors.dao.CoreDao;
+import com.example.mark.mydoctors.dao.MyDao;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -31,7 +32,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_maps);
 
 
-        coreDao = CoreDao.getInstance(this);
+        coreDao = MyDao.getInstance();
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
