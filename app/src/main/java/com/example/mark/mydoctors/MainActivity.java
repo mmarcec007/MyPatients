@@ -27,6 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mark.mydoctors.Adapters.PatientAdapter;
+import com.example.mark.mydoctors.Components.MainActivityComponent.ListComponent;
 import com.example.mark.mydoctors.CustomHelpers.Communicator;
 import com.example.mark.mydoctors.Model.Patient;
 import com.example.mark.mydoctors.dao.CoreDao;
@@ -55,8 +56,6 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
-        //inputSearch = (EditText) findViewById(R.id.myEditTextSearch);
         CoreDao.setInstance(getApplicationContext());
 
         coreDao = MyDao.getInstance();
@@ -67,16 +66,7 @@ public class MainActivity extends AppCompatActivity
 
         obj = (ListView)findViewById(R.id.listViewPatients);
 
-        obj.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-                // TODO Auto-generated method stub
-                Patient p = (Patient) obj.getItemAtPosition(arg2);
-                Intent i = new Intent(getApplicationContext(), DisasiesActivity.class);
-                i.putExtra("patients_id", p.getId());
-                startActivity(i);
-            }
-        });
+        new ListComponent(this, this).handle(obj);
 
         obj.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
             @Override

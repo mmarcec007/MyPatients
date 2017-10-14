@@ -22,6 +22,8 @@ public class CoreDao extends DBHelper {
 
     public static CoreDao getInstance() { return new CoreDao(contextField); }
 
+    public static Context getContextForDb() { return contextField; }
+
     public PatientDao instantiatePatientDao()
     {
         return new PatientDao(contextField);
